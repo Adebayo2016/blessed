@@ -1,12 +1,12 @@
 import 'package:blessed_academy/utils/colors.dart';
-import 'package:blessed_academy/views/widgets/images/svg_helper.dart';
+import 'package:blessed_academy/utils/navigation/src/navigation.dart';
 import 'package:blessed_academy/views/widgets/textview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../utils/text_field.dart';
 import '../../widgets/button.dart';
+import '../home/BlessedHome.dart';
 
 class AddGuardian extends StatelessWidget {
   const AddGuardian({super.key});
@@ -64,11 +64,8 @@ class AddGuardian extends StatelessWidget {
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
               height: 54.h,
-              // padding: const EdgeInsets.symmetric(horizontal: 40),
-              // icon: 'assets/icons/arrow_right.svg',
-              // iconColor: kColorWhite,
               onPressed: () {
-                // navigate(context, const AddGuardian());
+                navigate(context, const BlessedHome());
               },
               color: kColorWhite,
             ),
