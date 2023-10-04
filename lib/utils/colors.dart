@@ -27,7 +27,7 @@ const Color kColorMainPrimary = Color(0xFF4E74F9);
 const Color kColorMainSecondary = Color(0xFF3B46E7);
 
 /// [Text]
-const Color kCTextColor = Color(0xFFFCFCFC);
+const Color kCTextColor = Color(0xFF161C2B);
 const Color kCButtonColor = Color(0xFF00B897);
 const Color kCButtonPrimary = Color(0xFF3B46E7);
 

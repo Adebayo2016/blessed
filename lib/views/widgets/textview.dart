@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../utils/colors.dart';
+
 class TitleTextView extends StatelessWidget {
   final String text;
   final TextOverflow? textOverflow;
@@ -100,4 +102,28 @@ class TextView extends StatelessWidget {
       ),
     );
   }
+}
+
+Text kDefaultText({
+  @required String? text,
+  @required double? size,
+  bool blessedAcademy = false,
+  TextAlign align = TextAlign.left,
+  FontWeight? fontWeight,
+  bool defaultFontFamily = true,
+  String? fontFamily,
+}) {
+  return Text(
+    text!,
+    textAlign: align,
+    // overflow: TextOverflow.,
+    softWrap: true,
+    style: TextStyle(
+      color: blessedAcademy ? kColorMainPrimary : kCTextColor,
+      fontSize: size,
+      fontWeight: fontWeight,
+      fontFamily:
+          defaultFontFamily ? GoogleFonts.montserrat().fontFamily : fontFamily,
+    ),
+  );
 }

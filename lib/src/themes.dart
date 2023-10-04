@@ -39,7 +39,7 @@ OutlineInputBorder normalProfileBorder = const OutlineInputBorder(
 );
 
 OutlineInputBorder emptyBorder = const OutlineInputBorder(
-  borderSide: BorderSide(color: Color(0xFFE9E5EA), width: 1.0),
+  borderSide: BorderSide(color: kColorMainPrimary, width: 1.0),
   borderRadius: BorderRadius.all(
     Radius.circular(5),
   ),

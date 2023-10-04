@@ -12,8 +12,8 @@ class SvgHelperImage extends StatelessWidget {
       {Key? key,
       required this.image,
       this.color,
-      this.height = 24,
-      this.width = 24})
+      this.height = 20,
+      this.width = 20})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

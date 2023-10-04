@@ -49,7 +49,7 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding!,
+      padding: padding ?? EdgeInsets.zero,
       child: SizedBox(
         width: width ?? Helpers.getDeviceWidth(context),
         height: height ?? 56.0.h,
