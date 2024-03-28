@@ -1,5 +1,8 @@
 import 'package:blessed_academy/utils/colors.dart';
+import 'package:blessed_academy/views/ui/home/courseCard.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +39,7 @@ class _HomeState extends State<Home> {
                 margin: EdgeInsets.fromLTRB(13.w, 13.h, 13.h, 26.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: const Color(0xFF008CAF),
+                  color: const Color(0xFFc8a655),
                 ),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(23.w, 30.h, 28.w, 27.h),
@@ -49,7 +52,7 @@ class _HomeState extends State<Home> {
                         children: [
                           RichText(
                             text: TextSpan(
-                              text: 'Hello\n',
+                              text: 'Hello,\n',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
@@ -85,30 +88,33 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                       SizedBox(height: 35.h),
-                      SizedBox(
-                        height: 44.h,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            fillColor: kColorWhite,
-                            filled: true,
-                            prefixIcon: const Icon(Icons.search, size: 20),
-                            // suffix: HomeDropdownBtn(
-                            //   width: 43.w,
-                            // ),
-                            hintText: 'Search',
-                            hintStyle: TextStyle(
-                              color: const Color(0xFFB7B7B7),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                            ),
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(color: kColorWhite),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                          ),
-                        ),
-                      )
+
+
+
+                      // SizedBox(
+                      //   height: 44.h,
+                      //   child: TextFormField(
+                      //     decoration: InputDecoration(
+                      //       fillColor: kColorWhite,
+                      //       filled: true,
+                      //       prefixIcon: const Icon(Icons.search, size: 20),
+                      //       // suffix: HomeDropdownBtn(
+                      //       //   width: 43.w,
+                      //       // ),
+                      //       hintText: 'Search',
+                      //       hintStyle: TextStyle(
+                      //         color: const Color(0xFFB7B7B7),
+                      //         fontSize: 14,
+                      //         fontWeight: FontWeight.w400,
+                      //         fontFamily: GoogleFonts.inter().fontFamily,
+                      //       ),
+                      //       border: OutlineInputBorder(
+                      //         borderSide: const BorderSide(color: kColorWhite),
+                      //         borderRadius: BorderRadius.circular(100),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -142,23 +148,28 @@ class _HomeState extends State<Home> {
               const SizedBox(width: 30),
             ],
           ),
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
+                children: [
+                CourseCard(title: "UTME", image: "assets/icons/jb.png",),
+                  CourseCard(title: "post UTME", image: "assets/icons/jb.png",)
+                ],
 
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: false,
-              children: [
-                Card(
-                  child: Image.asset('assets/images/home/accounting.png'),
-                ),
-                Image.asset('assets/images/home/accounting.png'),
-                Image.asset('assets/images/home/accounting.png'),
-                Image.asset('assets/images/home/accounting.png'),
-                Image.asset('assets/images/home/accounting.png'),
-                Image.asset('assets/images/home/accounting.png'),
-              ],
-            ),
+              ),
+              SizedBox(height: 20.h),
+              Row(
+                mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
+                children: [
+                CourseCard(title: "Waec", image: "assets/icons/wae.png",),
+                  CourseCard(title: "Neco", image: "assets/icons/nec.png",)
+                ],
+
+              ),
+            ],
           )
+
         ],
       ),
     );

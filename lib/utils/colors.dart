@@ -23,13 +23,14 @@ const Color kTileColor = Color(0xFF002642);
 const Color kcBaseBlack = Color(0xFF161C2B);
 
 /// [Brand]
-const Color kColorMainPrimary = Color(0xFF4E74F9);
+const Color kColorMainPrimary = Color(0xFFc8a655);
 const Color kColorMainSecondary = Color(0xFF3B46E7);
 
 /// [Text]
-const Color kCTextColor = Color(0xFF161C2B);
+const Color kCTextColor = Color(0xFF2a211a);
 const Color kCButtonColor = Color(0xFF00B897);
 const Color kCButtonPrimary = Color(0xFF3B46E7);
+const Color kCBoxColor = Color(0xFFc4b89d);
 
 
 

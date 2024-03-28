@@ -1,7 +1,9 @@
 import 'package:blessed_academy/utils/colors.dart';
 import 'package:blessed_academy/views/ui/home/home.dart';
+import 'package:blessed_academy/views/ui/home/request_tutor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../Notification/notifications.dart';
@@ -33,6 +35,16 @@ class _BlessedHomeState extends State<BlessedHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 35),
+        child: FloatingActionButton.extended(onPressed: () {
+
+          Get.to(() => RequestTutor());
+        },
+          label: const Text('Request Tutor'),
+          icon: const Icon(Icons.chat_outlined),backgroundColor: kColorMainPrimary,),
+      ),
+
         body: SafeArea(
       child: PersistentTabView(
         context,
@@ -61,20 +73,20 @@ class _BlessedHomeState extends State<BlessedHome> {
         inactiveColorPrimary: kCTextColor,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset('assets/icons/chat.svg'),
-        title: ("Chat"),
+        icon: Icon(Icons.book_online_outlined),
+        title: ("Book"),
         activeColorPrimary: kColorMainPrimary,
         inactiveColorPrimary: kCTextColor,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.notifications_outlined),
-        title: ('Notifications'),
+        icon: const Icon(Icons.live_tv_outlined),
+        title: ('Live'),
         activeColorPrimary: kColorMainPrimary,
         inactiveColorPrimary: kCTextColor,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.person_3_outlined),
-        title: ('ACCOUNT'),
+        title: ('account'),
         activeColorPrimary: kColorMainPrimary,
         inactiveColorPrimary: kCTextColor,
       ),
@@ -84,8 +96,8 @@ class _BlessedHomeState extends State<BlessedHome> {
   List<Widget> _buildScreens() {
     return [
       const Home(),
-      const Chat(),
-      const Notifications(),
+      const Books(),
+      const Live(),
       const Account(),
     ];
   }

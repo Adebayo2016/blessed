@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "78278593217",
+    "project_id": "blessed-51e21",
+    "storage_bucket": "blessed-51e21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78278593217:android:356c072b2c3e7492bde240",
+        "android_client_info": {
+          "package_name": "com.example.blessed_academy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6RRY1gOoeJ2NW74P-OoUkKOAtqdLUi-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

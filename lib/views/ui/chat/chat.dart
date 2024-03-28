@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Chat extends StatelessWidget {
-  const Chat({super.key});
+class Books extends StatelessWidget {
+  const Books({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: Center(
+        child: Text('Materials you have bought will appear here'),
+      ),
+    );
   }
 }

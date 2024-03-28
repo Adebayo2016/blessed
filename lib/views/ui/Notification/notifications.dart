@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Notifications extends StatelessWidget {
-  const Notifications({super.key});
+class Live extends StatelessWidget {
+  const Live({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: Center(
+        child: Text('Live classes you have subscribed for will appear here'),
+      ),
+    );
   }
 }
