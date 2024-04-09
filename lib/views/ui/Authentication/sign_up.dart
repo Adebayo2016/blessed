@@ -108,6 +108,16 @@ class _SignUpState extends State<SignUp> {
                   },
                     child: const Text('Sign Up'),
                   ),
+                  const SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Already have an account?'),
+                      TextButton(onPressed: () {
+                      Get.to(()=>SignUp());
+                      }, child: const Text('Login'))
+                    ],
+                  )
                 ],
               ),
             ),

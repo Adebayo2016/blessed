@@ -1,14 +1,20 @@
+import 'package:blessed_academy/DataHandlers/HomeController.dart';
 import 'package:blessed_academy/utils/colors.dart';
+import 'package:blessed_academy/views/ui/home/AllCourses/jamb.dart';
+import 'package:blessed_academy/views/ui/home/AllCourses/necoCourses.dart';
+import 'package:blessed_academy/views/ui/home/AllCourses/waecCourses.dart';
 import 'package:blessed_academy/views/ui/home/courseCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../../utils/drop_down_textfield.dart';
+import 'AllCourses/postUtme.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,7 +23,17 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+
+
+
 class _HomeState extends State<Home> {
+  final HomeController _HomeController =Get.put(HomeController());
+
+  @override
+  void initState() {
+    _HomeController.getAllCourses();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
@@ -89,8 +105,6 @@ class _HomeState extends State<Home> {
                       ),
                       SizedBox(height: 35.h),
 
-
-
                       // SizedBox(
                       //   height: 44.h,
                       //   child: TextFormField(
@@ -151,25 +165,54 @@ class _HomeState extends State<Home> {
           Column(
             children: [
               Row(
-                mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                CourseCard(title: "UTME", image: "assets/icons/jb.png",),
-                  CourseCard(title: "post UTME", image: "assets/icons/jb.png",)
-                ],
+                  InkWell(
+                      onTap: () {
+                        Get.to(() => JambCourses());
+                      },
+                      child: CourseCard(
+                    title: "UTME",
+                    image: "assets/icons/jb.png",
+                  )),
+                  InkWell(
 
+                    onTap: () {
+                      Get.to(() => PostUtme());
+                    },
+                    child: CourseCard(
+                      title: "post UTME",
+                      image: "assets/icons/jb.png",
+                    ),
+                  )
+                ],
               ),
               SizedBox(height: 20.h),
               Row(
-                mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                CourseCard(title: "Waec", image: "assets/icons/wae.png",),
-                  CourseCard(title: "Neco", image: "assets/icons/nec.png",)
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => WaecCourses());
+                    },
+                    child: CourseCard(
+                      title: "Waec",
+                      image: "assets/icons/wae.png",
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => NecoCourses());
+                    },
+                    child: CourseCard(
+                      title: "Neco",
+                      image: "assets/icons/nec.png",
+                    ),
+                  )
                 ],
-
               ),
             ],
           )
-
         ],
       ),
     );

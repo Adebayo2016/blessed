@@ -4,14 +4,14 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import '../../../utils/colors.dart';
 
-class RequestTutor extends StatefulWidget {
-  const RequestTutor({super.key});
+class RequestOnlineTutor extends StatefulWidget {
+  const RequestOnlineTutor({super.key});
 
   @override
-  State<RequestTutor> createState() => _RequestTutorState();
+  State<RequestOnlineTutor> createState() => _RequestOnlineTutorState();
 }
 
-class _RequestTutorState extends State<RequestTutor> {
+class _RequestOnlineTutorState extends State<RequestOnlineTutor> {
   final HomeController _HomeController = HomeController();
 
   final TextEditingController _subjectController = TextEditingController();
@@ -43,7 +43,7 @@ class _RequestTutorState extends State<RequestTutor> {
                 const SizedBox(height: 20),
                 Text(
                   textAlign: TextAlign.center,
-                  'Request Tutor',
+                  'Online Class',
                   style: TextStyle(fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: kColorMainPrimary,
@@ -68,7 +68,7 @@ class _RequestTutorState extends State<RequestTutor> {
                   child: DropdownButton<String>(
                     //padding: const EdgeInsets.only(left: 120),
                     hint: Text("Select Class"),
-                    value: _HomeController.selectedRequest,
+                    value: _HomeController.selectedOnlineRequest,
                     borderRadius: BorderRadius.circular(12),
                     alignment: Alignment.center,
                     elevation: 16,
@@ -78,7 +78,7 @@ class _RequestTutorState extends State<RequestTutor> {
                     //     borderRadius: BorderRadius.circular(12),
                     //   ),
                     // ),
-                    items: _HomeController.requestOptions.map<
+                    items: _HomeController.OnlinerequestOptions.map<
                         DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -90,41 +90,17 @@ class _RequestTutorState extends State<RequestTutor> {
                     onChanged: (Value) {
                       setState(() {
                         //_HomeController.selectedRequest = newValue!;
-                        _HomeController.setNewRequest(Value!);
+                        _HomeController.setNewOnlineRequest(Value!);
                       });
                     },
                   ),
                 ),
-                const SizedBox(height: 20),
 
-                TextField(
-                  controller: _locationController,
-                  decoration: InputDecoration(
-                    hintText: ' your Address Location',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: _timeController,
-                  decoration: InputDecoration(
-                    hintText: 'Time',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  onTap: () {
-                    _selectTime(context);
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                  },
-                ),
                 const SizedBox(height: 20),
                 TextField(
                   enabled: false,
                   decoration: InputDecoration(
-                    hintText: _HomeController.requestPrice,
+                    hintText: _HomeController.onlineRequestPrice,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -134,7 +110,7 @@ class _RequestTutorState extends State<RequestTutor> {
                 ElevatedButton(
                   onPressed: () {
                     //_HomeController.testCharge();
-                    _HomeController.PayRequest(context);
+                    _HomeController.PayOnlineRequest(context);
                     // _HomeController.uploadRequest(
                     //   time: _timeController.text,
                     //   requestType: _HomeController.selectedRequest,
@@ -142,7 +118,7 @@ class _RequestTutorState extends State<RequestTutor> {
                     //   address: _locationController.text,
                     // );
                   },
-                  child: const Text('Request'),
+                  child: const Text('Subscribe'),
                 ),
               ],
             ),

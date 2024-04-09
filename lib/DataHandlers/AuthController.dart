@@ -41,12 +41,22 @@ class AuthController extends GetxController{
       print('creating account'  + email + password!);
       startLoading(Get.context!);
      await  _auth.createUserWithEmailAndPassword(email: email, password: password!).
-      then((value){
-        FirebaseFirestore firestore = FirebaseFirestore.instance;
-        firestore.collection('users').add({
+      then((value) async {
+       final User? user = _auth.currentUser;
+       if(user !=null){
+         await user.updateDisplayName(fullname!);
+       }
+
+        CollectionReference users = FirebaseFirestore.instance.collection('users');
+        DocumentReference documentReference = users.doc(email);
+
+        documentReference.set({
           'fullname': fullname,
           'phoneNumber': phoneNumber,
           'level': level,
+        }).then((value) => {
+          loadingSuccessful(null),
+          Get.to(() => BlessedHome())
         }).then((value) => {
            loadingSuccessful(null),
           Get.to(() => BlessedHome())
