@@ -6,7 +6,7 @@ class ApiRequest {
   Future<Map<String, dynamic>> getUserPaymentAuth(Map data) async {
     var headers = {
       'Authorization':
-          'Bearer sk_test_3691e13a493ccce86d79f4c65f00e32d1322c278',
+          'Bearer sk_test_5deb5a8453ad5d02d56769d7b21ea317c8560609',
       'Content-Type': 'application/json',
     };
     final String? _baseUrl = "https://api.paystack.co/transaction/initialize";

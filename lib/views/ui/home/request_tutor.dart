@@ -133,7 +133,8 @@ class _RequestTutorState extends State<RequestTutor> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    //_HomeController.testCharge();
+                    _HomeController.setLocation(_locationController.text);
+                    _HomeController.setTime(_timeController.text);
                     _HomeController.PayRequest(context);
                     // _HomeController.uploadRequest(
                     //   time: _timeController.text,

@@ -1,21 +1,21 @@
-import 'package:blessed_academy/views/ui/books/DownloadedBooks.dart';
-import 'package:blessed_academy/views/ui/home/AllCourses/postUtme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/colors.dart';
-import 'PurchasedBooks.dart';
+import 'Offline.dart';
+import 'Online.dart';
 
-class BookTab extends StatefulWidget {
-  const BookTab({Key? key}) : super(key: key);
+class Live extends StatefulWidget {
+  const Live({super.key});
 
   @override
-  _BookTabState createState() => _BookTabState();
+  State<Live> createState() => _LiveState();
 }
 
-class _BookTabState extends State<BookTab>
-    with SingleTickerProviderStateMixin {
+class _LiveState extends State<Live>  with SingleTickerProviderStateMixin{
+
+
+
   late TabController _tabController;
-  @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
@@ -72,10 +72,10 @@ class _BookTabState extends State<BookTab>
                   unselectedLabelColor: const Color(0xFF737373),
                   tabs: const [
                     Tab(
-                      text: "Purchased",
+                      text: "Online",
                     ),
                     Tab(
-                      text: "Downloaded",
+                      text: "Offline",
                     ),
                   ],
                 ),
@@ -86,8 +86,8 @@ class _BookTabState extends State<BookTab>
                   child: TabBarView(
                     controller: _tabController,
                     children:  [
-                      PurchasedBooks(),
-                      DownloadedBooks()
+                      OnlineSubs(),
+                      OfflineSub()
 
                     ],
                   ),

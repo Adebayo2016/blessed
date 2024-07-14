@@ -8,9 +8,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import '../Notification/notifications.dart';
 import '../account/account.dart';
 import '../books/book.dart';
+import '../subscriptions/subscriptions.dart';
 
 class BlessedHome extends StatefulWidget {
   const BlessedHome({super.key});
@@ -107,7 +107,7 @@ class _BlessedHomeState extends State<BlessedHome> {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.live_tv_outlined),
-        title: ('Live'),
+        title: ('Classes'),
         activeColorPrimary: kColorMainPrimary,
         inactiveColorPrimary: kCTextColor,
       ),

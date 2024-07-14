@@ -27,6 +27,8 @@ class AuthController extends GetxController{
   String? get level => levelController.text;
   String? get password => passwordController.text;
   String? get Cpassword => CpasswordController.text;
+  String? username;
+  String? phone;
 
   void login() {
     isLogged.value = true;
@@ -109,6 +111,7 @@ class AuthController extends GetxController{
 
 }
 
+
  validatePassword(){
     if(password != Cpassword){
       Get.snackbar('Error', 'Passwords do not match');
@@ -121,7 +124,15 @@ class AuthController extends GetxController{
     try {
       startLoading(Get.context!);
       await _auth.signInWithEmailAndPassword(email: email, password: password!).then((value) {
-        loadingSuccessful(null);
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          emailA = user.email!;
+
+
+          print('email is ' + emailA);
+        }
+
+
         Get.to(() => BlessedHome());
       }).catchError((error) {
         loadingFailed("an error Occured");
@@ -136,4 +147,26 @@ class AuthController extends GetxController{
     }
   }
 
+  void getUserDetails() {
+   var user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      emailA = user.email!;
+      print('email is ' + emailA);
+
+      DocumentReference documentReference = FirebaseFirestore.instance.collection('users').doc(emailA);
+      documentReference.get().then((value) {
+       var  data=value;
+       username=data['fullname'];
+        phone=data['phoneNumber'];
+        print('username is ' + username!);
+
+
+      });
+    }
+
+
+
+  }
+
 }
+

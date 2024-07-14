@@ -29,6 +29,8 @@ class HomeController extends GetxController {
     requestStoragePermission();
     getAllPurchasedCourse();
     loadDownloadedCourses();
+    FetchAllmyOnlineCourse();
+    FetchAllmyOfflineCourse();
 
     super.onInit();
   }
@@ -47,6 +49,8 @@ class HomeController extends GetxController {
   List<Map<String, dynamic>> necoCourses = [];
   List<Map<String, dynamic>> postUtmeCourses = [];
   List<Map<String,dynamic>>downloadedCourses=[];
+  List<Map<String, dynamic>>onlineCoursesSubscription=[];
+  List<Map<String, dynamic>>offlineCoursesSubscription=[];
   List<String> requestOptions = [
     'Junior classes 7k',
     'Senior classes 10k',
@@ -58,18 +62,31 @@ class HomeController extends GetxController {
     'UTME/WAEC/GCE 20K'
   ];
   Map? selectedPurchasedCourse;
+  Map? selectedOnlineCourse;
   String selectedRequest = 'Junior classes 7k';
   String selectedOnlineRequest= 'Junior classes 15k';
   String requestPrice = '\u20a67,000 monthly';
   String onlineRequestPrice = '\u20a615,000 monthly';
   int? requestTutorPrice = 7000;
   int? onlineRequestTutorPrice = 15000;
+  String? locationText;
+  String? timeSet;
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
 
-  get locationController => _locationController.text;
+  // get locationText => _locationController.text;
+  //
+  // get timeText => _timeController.text;
 
-  get timeController => _timeController.text;
+  setLocation(String value) {
+    locationText = value;
+    update();
+  }
+
+  setTime(String value) {
+    timeSet = value;
+    update();
+  }
 
   getAllCourses() {
     startLoading(Get.context!);
@@ -171,6 +188,12 @@ class HomeController extends GetxController {
   }
 
 
+  setSelectedOnlineSubscription(Map onlineCourse){
+    selectedOnlineCourse = onlineCourse;
+    update();
+  }
+
+
   uploadRequest(
       {String? time,
       String? requestType,
@@ -191,10 +214,11 @@ class HomeController extends GetxController {
         'Address': address,
         'expiryDate': expiryDate,
         'user_id': userEmail,
+        'student_name': FirebaseAuth.instance.currentUser?.displayName,
       }).then((value) => {
             loadingSuccessful(null),
             Get.snackbar('Success', 'Request successful'),
-            Navigator.pop(Get.context!),
+             Get.to(BlessedHome())
           });
     } catch (e) {
       print(e);
@@ -215,6 +239,7 @@ class HomeController extends GetxController {
         'end_date':subscriptionEnd,
         'subscriber_name': FirebaseAuth.instance.currentUser?.displayName,
         'amount': onlineRequestTutorPrice,
+        'course_id':selectedOnlineRequest=="Junior classes 15k"?"j15":selectedOnlineRequest=="Senior classes 18k"?"s18":"w20",
 
       }).then((value) => {
         loadingSuccessful(null),
@@ -236,8 +261,8 @@ class HomeController extends GetxController {
 
   addToPurchasedCourse() async {
     String? userId= FirebaseAuth.instance.currentUser?.email;
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
-    CollectionReference<Map<String, dynamic>> documentReference = users.doc(userId).collection('PurchasedCourses');
+    CollectionReference purchases = FirebaseFirestore.instance.collection('purchases');
+    //CollectionReference<Map<String, dynamic>> documentReference = users.doc(userId).collection('PurchasedCourses');
     String courseName=currentCourse['name'];
     String courseDescription=currentCourse['desc'];
     DateTime purchasedTime= DateTime.now();
@@ -245,11 +270,12 @@ class HomeController extends GetxController {
     try {
       startLoading(Get.context!, "please wait ");
 
-      documentReference.add({
+      purchases.add({
         'name': courseName,
         'desc':courseDescription,
-        'purchased':purchasedTime,
-        'downloadUrl': downloadUrl
+        'purchasedDate':purchasedTime,
+        'downloadUrl': downloadUrl,
+        'purchased_by':userId,
       }).then((value) => {
         loadingSuccessful(null),
         Get.snackbar('Success', 'Successfully purchased'),
@@ -308,10 +334,10 @@ class HomeController extends GetxController {
             if (request.url.contains('https://www.github.com')) {
               Navigator.pop(context);
               uploadRequest(
-                  time: timeController,
+                  time: timeSet,
                   requestType: selectedRequest,
                   requestPrice: requestPrice,
-                  address: locationController);
+                  address: locationText);
             } else {
               print("this is the url change  " + request.url);
               Navigator.pop(context);
@@ -393,11 +419,7 @@ class HomeController extends GetxController {
             print("this is the url change  " + request.url);
             if (request.url.contains('https://www.github.com')) {
               Navigator.pop(context);
-              uploadRequest(
-                  time: timeController,
-                  requestType: selectedRequest,
-                  requestPrice: requestPrice,
-                  address: locationController);
+              addToSubscription();
             } else {
               print("this is the url change  " + request.url);
               Navigator.pop(context);
@@ -614,7 +636,69 @@ class HomeController extends GetxController {
         update();
       }
 
+  FetchAllmyOnlineCourse(){
+    String? userId= FirebaseAuth.instance.currentUser?.email;
+    try {
+      startLoading(Get.context!);
+      FirebaseFirestore.instance
+          .collection('subscribers')
+          .where('user_id', isEqualTo: userId)
+          .snapshots()
+          .listen((snapshot) {
+        if (snapshot.docs.isEmpty) {
+          loadingSuccessful("success");
+          print("no data available");
+        } else {
+          snapshot.docs.forEach((element) {
+            onlineCoursesSubscription.add(element.data());
+          });
+          loadingSuccessful("success");
+          print("data available");
+        }
+      });
+    } catch (e) {
+      loadingFailed("an error occurred");
+      print(e.toString());
+    }
+
+
+
+
   }
+  FetchAllmyOfflineCourse(){
+    String? userId= FirebaseAuth.instance.currentUser?.email;
+    try {
+      startLoading(Get.context!);
+      FirebaseFirestore.instance
+          .collection('TutorRequests')
+          .where('user_id', isEqualTo: userId)
+          .snapshots()
+          .listen((snapshot) {
+        if (snapshot.docs.isEmpty) {
+          loadingSuccessful("success");
+          print("no data available");
+        } else {
+          snapshot.docs.forEach((element) {
+            offlineCoursesSubscription.add(element.data());
+          });
+          loadingSuccessful("success");
+          print("data available");
+        }
+      });
+    } catch (e) {
+      loadingFailed("an error occurred");
+      print(e.toString());
+    }
+
+
+
+
+  }
+
+  }
+
+
+
 
 
 
